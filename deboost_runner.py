@@ -21,7 +21,8 @@ checkpoint_path: 모델의 경로
   길이가 9인 배열이 반환
   0번부터 챌린저 -> 그마 -> 마스터 -> ... -> 아이언
 """
-checkpoint_path = 'model.pth.tar'
+# checkpoint_path = ''
+checkpoint_path = '/home/ec2-user/deboost_flask/model.pth.tar'
 
 if checkpoint_path == 'model.pth.tar':
   print('checkpoint_path 경로 바꿔라')
@@ -31,9 +32,11 @@ position_encode = {'TOP':0,'MIDDLE':1,'JUNGLE':2,'BOTTOM':3,'UTILITY':4}
 def pre_process(match_data):
     deletion = ['summonerName', 'individualPosition','lane','puuid','profileIcon','riotIdName','riotIdTagline','role','summonerId','championName','perks','challenges']
     participants = match_data['info']['participants']
+    # print(len(participants[0].keys()))
     data = []
     for part in participants:
         if len(part.keys()) < 121:
+            # print('error')
             return None
         for d in deletion:
             del part[d]
